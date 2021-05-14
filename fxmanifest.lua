@@ -31,7 +31,7 @@ client_scripts {
 server_scripts {
     '@mysql-async/lib/MySQL.lua',
     '@es_extended/locale.lua',
-    'locales/pt.lua',
+    'locales/en.lua',
     'config.lua',
     'server/main.lua',
     'server/actions.lua',
@@ -73,7 +73,7 @@ files {
     'html/img/items/*.png',
 
     -- Languages
-    'html/locales/pt.js',
+    'html/locales/en.js',
 
     -- Base
     'html/js/config.js',

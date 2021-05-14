@@ -52,7 +52,7 @@ end)
 RegisterServerEvent('esx_inventory:modifiedInventory')
 AddEventHandler('esx_inventory:modifiedInventory', function(identifier, type, data)
     if type == 'drop' then
-        print('Drop | esx_inventory:modifiedInventory | Data received: ' .. json.encode(data))
+        dprint('Drop | esx_inventory:modifiedInventory | Data received: ' .. json.encode(data))
 
         if data then
             if Config.Drops.Markers then
@@ -79,7 +79,7 @@ end)
 RegisterServerEvent('esx_inventory:savedInventory')
 AddEventHandler('esx_inventory:savedInventory', function(identifier, type, data)
     if type == 'drop' then
-        print('Drop | esx_inventory:savedInventory | ' .. json.encode(data))
+        dprint('Drop | esx_inventory:savedInventory | ' .. json.encode(data))
 
         if data then
             if Config.Drops.Markers then
@@ -93,7 +93,7 @@ end)
 RegisterServerEvent('esx_inventory:createdInventory')
 AddEventHandler('esx_inventory:createdInventory', function(identifier, type, data)
     if type == 'drop' then
-        print('Drop | esx_inventory:createdInventory | ' .. json.encode(data))
+        dprint('Drop | esx_inventory:createdInventory | ' .. json.encode(data))
 
         if data then
             if Config.Drops.Markers then
@@ -107,7 +107,7 @@ end)
 RegisterServerEvent('esx_inventory:deletedInventory')
 AddEventHandler('esx_inventory:deletedInventory', function(identifier, type)
     if type == 'drop' then
-        print('Drop | esx_inventory:deletedInventory')
+        dprint('Drop | esx_inventory:deletedInventory')
 
         if Config.Drops.Markers then
             drops[identifier] = nil
