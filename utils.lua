@@ -18,3 +18,9 @@ function table.print(table)
         print(k .. ' ' .. tostring(v))
     end
 end
+
+function dprint(message)
+    if Config.Debug then
+        print(tostring(message))
+    end
+end

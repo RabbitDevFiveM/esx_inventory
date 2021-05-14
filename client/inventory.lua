@@ -81,10 +81,10 @@ function refreshSecondaryInventory()
     ESX.TriggerServerCallback('esx_inventory:canOpenInventory', function(canOpen)
         if canOpen or secondInventory.type == 'shop' then
             ESX.TriggerServerCallback('esx_inventory:getSecondaryInventory', function(data)
-                print('refreshSecondaryInventory() | Data: ' .. json.encode(data))
-                print('refreshSecondaryInventory() | Data Inventory: ' .. json.encode(data.inventory))
-                print('refreshSecondaryInventory() | Data Inventory ID: ' .. json.encode(data.invId))
-                print('refreshSecondaryInventory() | Data Inventory Tier: ' .. json.encode(data.invTier))
+                dprint('refreshSecondaryInventory() | Data: ' .. json.encode(data))
+                dprint('refreshSecondaryInventory() | Data Inventory: ' .. json.encode(data.inventory))
+                dprint('refreshSecondaryInventory() | Data Inventory ID: ' .. json.encode(data.invId))
+                dprint('refreshSecondaryInventory() | Data Inventory Tier: ' .. json.encode(data.invTier))
 
                 SendNUIMessage({
                     action = 'setSecondInventoryItems',

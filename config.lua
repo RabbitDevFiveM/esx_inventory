@@ -1,6 +1,6 @@
 Config = {}
-
-Config.Locale = 'pt'
+Config.Debug = false
+Config.Locale = 'en'
 Config.OpenControl = 289 -- Tecla F2
 Config.TrunkOpenControl = 47 -- Tecla G
 Config.DeleteDropsOnStart = false -- Deseja remover os drops no startup do servidor?

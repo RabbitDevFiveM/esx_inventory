@@ -40,13 +40,13 @@ end)
 
 function dumpInventory(inventory)
     for k, v in pairs(inventory) do
-        print(k .. ' ' .. v.name)
+        dprint(k .. ' ' .. v.name)
     end
 end
 
 RegisterServerEvent('esx_inventory:MoveToEmpty')
 AddEventHandler('esx_inventory:MoveToEmpty', function(data)
-    print('esx_inventory:MoveToEmpty | Data: ' .. json.encode(data))
+    dprint('esx_inventory:MoveToEmpty | Data: ' .. json.encode(data))
 
     local source = source
     handleWeaponRemoval(data, source)
@@ -83,7 +83,7 @@ AddEventHandler('esx_inventory:MoveToEmpty', function(data)
         originInvHandler.applyToInventory(data.originOwner, function(originInventory)
             destinationInvHandler.applyToInventory(data.destinationOwner, function(destinationInventory)
                 if data.destinationTier.name == 'player' then
-                    print('data.destinationTier.name == player | Data: ' .. json.encode(originInventory[tostring(data.originSlot)]))
+                    dprint('data.destinationTier.name == player | Data: ' .. json.encode(originInventory[tostring(data.originSlot)]))
 
                     if originInventory[tostring(data.originSlot)].pickupId then
                         local pickupId = originInventory[tostring(data.originSlot)].pickupId
@@ -118,7 +118,7 @@ end)
 
 RegisterServerEvent('esx_inventory:SwapItems')
 AddEventHandler('esx_inventory:SwapItems', function(data)
-    print('esx_inventory:SwapItems | Data: ' .. json.encode(data))
+    dprint('esx_inventory:SwapItems | Data: ' .. json.encode(data))
 
     local source = source
     handleWeaponRemoval(data, source)
@@ -181,7 +181,7 @@ end)
 
 RegisterServerEvent('esx_inventory:CombineStack')
 AddEventHandler('esx_inventory:CombineStack', function(data)
-    print('esx_inventory:CombineStack | Data: ' .. json.encode(data))
+    dprint('esx_inventory:CombineStack | Data: ' .. json.encode(data))
 
     local source = source
     handleWeaponRemoval(data, source)
@@ -243,7 +243,7 @@ end)
 
 RegisterServerEvent('esx_inventory:TopoffStack')
 AddEventHandler('esx_inventory:TopoffStack', function(data)
-    print('esx_inventory:TopoffStack | Data: ' .. json.encode(data))
+    dprint('esx_inventory:TopoffStack | Data: ' .. json.encode(data))
 
     local source = source
     handleWeaponRemoval(data, source)
@@ -306,7 +306,7 @@ end)
 
 RegisterServerEvent('esx_inventory:EmptySplitStack')
 AddEventHandler('esx_inventory:EmptySplitStack', function(data)
-    print('esx_inventory:EmptySplitStack | Data: ' .. json.encode(data))
+    dprint('esx_inventory:EmptySplitStack | Data: ' .. json.encode(data))
 
     local source = source
     handleWeaponRemoval(data, source)
@@ -377,7 +377,7 @@ end)
 
 RegisterServerEvent('esx_inventory:SplitStack')
 AddEventHandler('esx_inventory:SplitStack', function(data)
-    print('esx_inventory:SplitStack | Data: ' .. json.encode(data))
+    dprint('esx_inventory:SplitStack | Data: ' .. json.encode(data))
 
     local source = source
     handleWeaponRemoval(data, source)
@@ -439,7 +439,7 @@ end)
 
 function debugData(data)
     for k, v in pairs(data) do
-        print(k .. ' ' .. v)
+        dprint(k .. ' ' .. v)
     end
 end
 
@@ -467,7 +467,7 @@ function removeItemFromInventory(item, count, inventory)
                 inventory[k] = nil
                 return
             else
-                print('Missing Remove condition')
+                dprint('Missing Remove condition')
             end
         end
     end
@@ -505,7 +505,7 @@ function AttemptMerge(item, inventory, count)
                 inventory[tostring(k)].count = v.count + count
                 return 0
             else
-                print('Missing MERGE condition')
+                dprint('Missing MERGE condition')
             end
         end
     end
@@ -533,12 +533,12 @@ function AddToEmpty(item, type, inventory, count)
         end
     end
 
-    print('Inventory Overflow!')
+    dprint('Inventory Overflow!')
     return 0
 end
 
 function createDisplayItem(item, esxItem, slot, price, type)
-    print('createDisplayItem | Item: ' .. json.encode(item))
+    dprint('createDisplayItem | Item: ' .. json.encode(item))
     local max = getItemsInfo(item.name, 'limit') or 2147483647
     if max == -1 then
         max = 2147483647
@@ -578,7 +578,7 @@ end)
 
 ESX.RegisterServerCallback('esx_inventory:getSecondaryInventory', function(source, cb, type, identifier)
     if InvType[type] == nil then
-        print('ERROR FINDING INVENTORY TYPE:' .. type)
+        dprint('ERROR FINDING INVENTORY TYPE:' .. type)
         return
     end
 
@@ -614,7 +614,7 @@ function saveInventories()
         end
     end
 
-    print(('[esx_inventory] [^2INFO^7] Saved %s inventory(ies) and deleted %s inventory(ies)'):format(totalSavedInventories, totalDeletedInventories))
+    dprint(('[esx_inventory] [^2INFO^7] Saved %s inventory(ies) and deleted %s inventory(ies)'):format(totalSavedInventories, totalDeletedInventories))
 end
 
 function saveInventory(identifier, type)
@@ -631,8 +631,8 @@ function saveLoadedInventory(identifier, type, data)
             }
         end
 
-        print('saveLoadedInventory | Data: ' .. json.encode(data))
-        print('saveLoadedInventory | Data: ' .. json.encode(newData))
+        dprint('saveLoadedInventory | Data: ' .. json.encode(data))
+        dprint('saveLoadedInventory | Data: ' .. json.encode(newData))
 
         MySQL.Async.execute('UPDATE inventories SET data=@data WHERE owner=@owner AND type=@type', {
             ['@owner'] = identifier,
@@ -650,7 +650,7 @@ function saveLoadedInventory(identifier, type, data)
 end
 
 function createInventory(identifier, type, data)
-    print('createInventory | Identifier: ' .. json.encode(identifier) .. ' | Type: ' .. json.encode(type) .. ' | Data: ' .. json.encode(data))
+    dprint('createInventory | Identifier: ' .. json.encode(identifier) .. ' | Type: ' .. json.encode(type) .. ' | Data: ' .. json.encode(data))
     MySQL.Async.execute('INSERT INTO inventories (owner, type, data) VALUES (@owner, @type, @data)', {
         ['@owner'] = identifier,
         ['@type'] = type,
@@ -717,7 +717,7 @@ function getInventory(identifier, type, cb)
 end
 
 function applyToInventory(identifier, type, invFunction)
-    print('applyToInventory | Identifier: ' .. json.encode(identifier) .. ' | Type: ' .. json.encode(type))
+    dprint('applyToInventory | Identifier: ' .. json.encode(identifier) .. ' | Type: ' .. json.encode(type))
 
     if loadedInventories[type][identifier] ~= nil then
         invFunction(loadedInventories[type][identifier])
@@ -728,7 +728,7 @@ function applyToInventory(identifier, type, invFunction)
     end
 
     if loadedInventories[type][identifier] and table.length(loadedInventories[type][identifier]) > 0 then
-        print('loadedInventories | Identifier: ' .. json.encode(identifier) .. ' | Type: ' .. json.encode(type) .. ' | Inventory: ' .. json.encode(loadedInventories[type][identifier]))
+        dprint('loadedInventories | Identifier: ' .. json.encode(identifier) .. ' | Type: ' .. json.encode(type) .. ' | Inventory: ' .. json.encode(loadedInventories[type][identifier]))
         TriggerEvent('esx_inventory:modifiedInventory', identifier, type, loadedInventories[type][identifier])
     else
         TriggerEvent('esx_inventory:modifiedInventory', identifier, type, nil)
