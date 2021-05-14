@@ -13,7 +13,7 @@ Config.StashMaxWeight = 650 -- Peso máximo que os armazéns podem suportar
 Config.GloveboxMaxWeight = 30 -- Peso máximo que os torpedos podem suportar
 
 Config.Drops = {
-    Markers = true,
+    Markers = false,
     Pickups = false -- [WIP] Better to stay false for avoid dupe bugs
 }
 

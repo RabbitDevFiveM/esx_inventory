@@ -614,7 +614,7 @@ function saveInventories()
         end
     end
 
-    dprint(('[esx_inventory] [^2INFO^7] Saved %s inventory(ies) and deleted %s inventory(ies)'):format(totalSavedInventories, totalDeletedInventories))
+    print(('[esx_inventory] [^2INFO^7] Saved %s inventory(ies) and deleted %s inventory(ies)'):format(totalSavedInventories, totalDeletedInventories))
 end
 
 function saveInventory(identifier, type)
